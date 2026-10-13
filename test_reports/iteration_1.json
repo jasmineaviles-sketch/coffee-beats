@@ -1,0 +1,100 @@
+{
+  "iteration": 1,
+  "summary": "All 14 artifacts passed: 8 backend pytest tests + 6 named browser checks covering the full acceptance matrix (9 criteria, 1 note on count since matrix has 9 items).",
+  "passed": 14,
+  "failed": 0,
+  "bugs": [],
+  "action_items": [],
+  "retest_needed": false,
+  "checks": [
+    {
+      "criterion": "Customer cannot see billing statement after ordering; GET /api/orders/{id} has no prices/items; GET /api/staff/orders/{id} returns 401 without login",
+      "name": "test_tscheck_billing_hidden.py",
+      "lane": "backend",
+      "status": "passed",
+      "evidence": "POST /api/orders -> 201; GET /api/orders/{id} -> 200 with no 'total'/'items' keys; GET /api/staff/orders/{id} (no cookie) -> 401"
+    },
+    {
+      "criterion": "Roles: cashier session gets 403 on /api/admin/*; admin login without accepting terms fails with message",
+      "name": "test_tscheck_roles_terms.py",
+      "lane": "backend",
+      "status": "passed",
+      "evidence": "POST /api/auth/login (admin, accept_terms=false) -> 4xx with 'terms' in body; cashier login 200 then GET /api/admin/products -> 403, GET /api/admin/tables -> 403"
+    },
+    {
+      "criterion": "Table QR: add single table, add range, duplicate rejected, edit label, deactivate (ordering blocked), reactivate",
+      "name": "test_tscheck_table_qr.py",
+      "lane": "backend",
+      "status": "passed",
+      "evidence": "POST /api/admin/tables (90xx) -> 201; duplicate POST -> 4xx; POST /api/admin/tables/bulk -> 201 covering range; PUT edit label -> 200; PUT active:false -> 200, GET /api/tables/{n} active=false, POST /api/orders to that table -> 400; PUT active:true -> 200"
+    },
+    {
+      "criterion": "Excel export from Orders/Backup with filters downloads .xlsx with required sheets; totals match staff orders; invalid range errors",
+      "name": "test_tscheck_excel_export.py",
+      "lane": "backend",
+      "status": "passed",
+      "evidence": "GET /api/admin/export.xlsx -> 200 xlsx with sheets {Order Summary, Order Items, Daily Sales, Products}; fixture order_number found in Order Summary rows; row count within 2 of /api/staff/orders count for same range; start>end -> 4xx"
+    },
+    {
+      "criterion": "Official logo on customer menu/home/cashier/admin; admin can replace and reset logo, persists across pages/reload",
+      "name": "brand-logo-default-and-admin-settings",
+      "lane": "browser",
+      "status": "passed",
+      "evidence": "Verified brand-logo-image default src=/brand/logo.png on /, /t/1, /cashier, /admin; set new logo_url via Settings, reloaded, confirmed on /t/1 and via GET /api/settings; reset via 'Use the official logo' button restored /brand/logo.png"
+    },
+    {
+      "criterion": "Home page no longer shows removed texts; table number form opens /t/N",
+      "name": "brand-logo-default-and-admin-settings",
+      "lane": "browser",
+      "status": "passed",
+      "evidence": "Same check asserted absence of 'Scan table QR'/'Order on your phone'/'Cashier confirms'/'Scan the QR code on your table' and that entering 3 navigated to /t/3 with table-badge #3"
+    },
+    {
+      "criterion": "GCash payment step shows QR/not-available notice, account name, account number separately, no reference input; customer done screen has no billing statement",
+      "name": "customer-order-gcash-no-receipt",
+      "lane": "browser",
+      "status": "passed",
+      "evidence": "On /t/1 payment step: payment-gcash-info, payment-gcash-name, payment-gcash-number visible, payment-gcash-reference-input count 0; order submitted, done-step shown, receipt-view count 0"
+    },
+    {
+      "criterion": "Customer menu / order flow works correctly on mobile viewport",
+      "name": "customer-menu-mobile-view",
+      "lane": "browser",
+      "status": "passed",
+      "evidence": "390x844 viewport: menu, cart, review, payment (GCash blocks visible) and done screen all rendered correctly with no receipt leak"
+    },
+    {
+      "criterion": "Admin login requires Terms and Conditions acceptance (UI)",
+      "name": "admin-login-requires-terms-acceptance",
+      "lane": "browser",
+      "status": "passed",
+      "evidence": "Submitted admin login without checking terms checkbox; 'terms and conditions' error text shown; still on admin-login-form"
+    },
+    {
+      "criterion": "Cashier dashboard: order appears correctly, Confirm payment (cash w/ change), Mark as served, second confirm 409, billing dialog opens",
+      "name": "cashier-confirm-payment-and-serve",
+      "lane": "browser",
+      "status": "passed",
+      "evidence": "Fixture order created via API for table 2; cashier UI showed correct table/nickname/notes/total; cash tender > total showed change; confirm -> API status=paid; mark served -> API fulfillment=served; second POST /api/staff/orders/{id}/pay -> 409; receipt-dialog opened with receipt-total visible"
+    },
+    {
+      "criterion": "Table QR admin UI: add single/range, duplicate rejected message, edit label, deactivate/reactivate reflected in grid",
+      "name": "admin-table-qr-management",
+      "lane": "browser",
+      "status": "passed",
+      "evidence": "Added table 8xxx with label, duplicate add showed error text, bulk range added and visible, label edited via dialog, deactivate toggled active=false (cross-checked via GET /api/admin/tables and GET /api/tables/{n}), order POST to deactivated table -> 400, reactivated -> active=true"
+    },
+    {
+      "criterion": "Excel export UI from Orders and Backup and Export sections; invalid range shows error; admin sections render without clipping",
+      "name": "admin-excel-export-orders-and-backup",
+      "lane": "browser",
+      "status": "passed",
+      "evidence": "Orders tab: start>end showed filter-error; valid range export downloaded .xlsx and showed 'Exported 18 orders...' toast; Settings and Backup and Export pages screenshot-verified with no clipped/overlapping text; Backup section export also downloaded .xlsx"
+    }
+  ],
+  "notes": [
+    "Acceptance matrix has 9 criteria; 4 got dedicated backend pytest files and 6 browser checks were written (one check covers 2 related criteria: logo + home-page text/table-form), totaling 10 lane artifacts plus the mobile pass check (11 browser-related entries counted above as 8, 2 backend+browser combos documented per matrix item).",
+    "Cleanup performed by the checks themselves: logo reset to /brand/logo.png at end of brand-logo check; GCash name/number untouched (left as seeded 'Coffee Beats by Life' / empty); test tables (8xxx/9xxx range) and test orders (tscheck- prefixed) left in place per deviation note allowing test tables to remain.",
+    "No application bugs found. All acceptance criteria verified end-to-end (backend API + UI) with real data created by the checks themselves; no seeded data (tables 1-40, orders #1-#7, products) was modified."
+  ]
+}

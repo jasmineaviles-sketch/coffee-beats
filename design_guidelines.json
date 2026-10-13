@@ -1,0 +1,155 @@
+{
+  "theme": "warm-earthy-coffee",
+  "archetype": "ARCHETYPE 1: ORGANIC & EARTHY (Coffee shop, warm wood, roasted tones, cream)",
+  "colors": {
+    "surfaces": [
+      {
+        "name": "page",
+        "kind": "solid",
+        "bg": "#FBF7F0",
+        "on_bg": "#2B1810",
+        "on_bg_muted": "#6E5343",
+        "roles": {
+          "accent": "#8C4A27",
+          "border": "#E5D7C7"
+        }
+      },
+      {
+        "name": "panel",
+        "kind": "solid",
+        "bg": "#FFFFFF",
+        "on_bg": "#2B1810",
+        "on_bg_muted": "#755C4D",
+        "roles": {
+          "border": "#EADA CE",
+          "badge_bg": "#8C4A27",
+          "badge_text": "#FFFFFF"
+        }
+      },
+      {
+        "name": "hero_overlay",
+        "kind": "image",
+        "contrast_against": "#180E09",
+        "guarantee": "scrim: linear-gradient(180deg, rgba(24,14,9,0.82) 0%, rgba(43,24,16,0.68) 50%, rgba(24,14,9,0.92) 100%)",
+        "on_bg": "#FFF9F2",
+        "on_bg_muted": "#E5D2BF",
+        "roles": {
+          "pill_bg": "#8C4A27",
+          "pill_text": "#FFF8F0",
+          "highlight": "#DDA77B"
+        }
+      },
+      {
+        "name": "card_menu_tile",
+        "kind": "solid",
+        "bg": "#F5ECE1",
+        "on_bg": "#2B1810",
+        "on_bg_muted": "#664B3B",
+        "roles": {
+          "border": "#DFCABB",
+          "stepper_bg": "#8C4A27",
+          "stepper_text": "#FFFFFF"
+        }
+      },
+      {
+        "name": "footer_bar",
+        "kind": "solid",
+        "bg": "#26150D",
+        "on_bg": "#FFF9F2",
+        "on_bg_muted": "#D6BEA8",
+        "roles": {
+          "cta_bg": "#8C4A27",
+          "cta_text": "#FFFFFF"
+        }
+      },
+      {
+        "name": "inverse",
+        "kind": "solid",
+        "bg": "#1F110A",
+        "on_bg": "#FFF8F0",
+        "on_bg_muted": "#D2BCA8"
+      }
+    ],
+    "accent": "#8C4A27",
+    "on_accent": "#FFFFFF",
+    "warm_brown": "#6F3E22",
+    "cream": "#FBF7F0",
+    "dark_roast": "#26150D"
+  },
+  "typography": {
+    "font_heading": "'Playfair Display Variable', serif",
+    "font_sans": "'DM Sans Variable', sans-serif",
+    "font_mono": "'IBM Plex Mono', monospace",
+    "scale_px": {
+      "display": 52,
+      "h1": 40,
+      "h2": 30,
+      "h3": 22,
+      "body": 16,
+      "caption": 14
+    }
+  },
+  "entry_surfaces": {
+    "/t/:table": "Scenic cafe background with dark roast overlay, oval brand emblem header, rounded brown TABLE # badge top-right, 3x3 rounded menu tile grid with steppers, sticky bottom order action bar",
+    "/orders/review": "Warm paper modal sheet showing itemized summary, quantity stepper, customer nickname field, payment method selector (Cash / GCash / Card), confirm order action",
+    "/orders/payment": "Payment instructional view with GCash QR scan preview & details, Card entry form, or Cash instructions",
+    "/orders/success": "Warm thank-you voucher card with live order status badge, printable receipt button, bill out prompt",
+    "/cashier": "Split screen terminal — live table order queue with badge count left, active order breakdown + cashier payment confirmation + receipt print right",
+    "/admin/login": "Warm coffee shop branded split login — terms & conditions modal acceptance mandatory before sign-in",
+    "/admin": "Management dashboard with tabs for Products CRUD (image URL/upload), Categories, Live Orders & Sales Analytics, 40-table QR generator with bulk printable layout, Backup & Restore JSON, Store Settings"
+  },
+  "component_structure": {
+    "customer_menu": {
+      "header": "Oval logo with mountain/coffee motif, tagline 'STAY FOR A MOMENT. CRAFTED FOR LIFE', prominent Table # badge with table switcher for testing",
+      "category_pills": "Horizontal scrollable rounded brown pills (All, Coffee, Non-Coffee, Pastries, Meals, Add-ons)",
+      "product_grid": "3-column responsive grid on phone/tablet, rounded card tiles (rounded-2xl/3xl), product photo, name, Philippine Peso price (e.g. ₱140.00), quantity decrement/increment pill",
+      "bottom_bar": "Sticky bottom bar with Total items & amount, View Orders button, Quick Done button"
+    },
+    "cashier_terminal": {
+      "table_cards": "Visual grid of tables (1-40) with color status: Available (green/cream), Pending Payment (amber), Paid/Served (brown)",
+      "order_action": "Mark as Paid (Cash/GCash/Card verified), Print Official Receipt, Cancel/Refund"
+    },
+    "admin_dashboard": {
+      "terms_and_conditions": "Configurable T&C text in settings, modal gate on login requiring checkbox consent",
+      "product_manager": "Create/edit/delete product with custom image upload or direct image URL (Imgur/Unsplash/CDN), price, category, availability toggle",
+      "qr_generator": "Generate high-resolution printable QR codes for tables 1 to 40 directly linking to `/t/{number}`",
+      "sales_reports": "Daily sales summary, top selling items, payment method breakdown, Excel (.xlsx) export button",
+      "cloud_backup": "One-click JSON export of database & settings, JSON file restore upload"
+    }
+  },
+  "image_urls": [
+    {
+      "category": "hero_background",
+      "url": "https://images.unsplash.com/photo-1598022186152-1b66e6c38245?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2OTV8MHwxfHNlYXJjaHwyfHxjb2ZmZWUlMjBjdXAlMjBsYXR0ZSUyMHBhc3RyeXxlbnwwfHx8fDE3OTE2MjU1MDl8MA&ixlib=rb-4.1.0&q=85",
+      "description": "Warm mountain cafe background photo with coffee latte art"
+    },
+    {
+      "category": "product_latte",
+      "url": "https://images.unsplash.com/photo-1776397280314-275d0f295fd9?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2OTV8MHwxfHNlYXJjaHw0fHxjb2ZmZWUlMjBjdXAlMjBsYXR0ZSUyMHBhc3RyeXxlbnwwfHx8fDE3OTE2MjU1MDl8MA&ixlib=rb-4.1.0&q=85",
+      "description": "Artisan coffee cup with pastry"
+    },
+    {
+      "category": "product_cappuccino",
+      "url": "https://images.unsplash.com/photo-1612880202987-b1ec29fb0839?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2OTV8MHwxfHNlYXJjaHwxfHxjb2ZmZWUlMjBjdXAlMjBsYXR0ZSUyMHBhc3RyeXxlbnwwfHx8fDE3OTE2MjU1MDl8MA&ixlib=rb-4.1.0&q=85",
+      "description": "Classic cappuccino on wooden table"
+    },
+    {
+      "category": "product_pastry",
+      "url": "https://images.unsplash.com/photo-1777000000010-c44d5c4caeb9?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2OTV8MHwxfHNlYXJjaHwzfHxjb2ZmZWUlMjBjdXAlMjBsYXR0ZSUyMHBhc3RyeXxlbnwwfHx8fDE3OTE2MjU1MDl8MA&ixlib=rb-4.1.0&q=85",
+      "description": "Chocolate pastry with coffee"
+    }
+  ],
+  "accessibility": {
+    "wcag_compliance": "AA (4.5:1 text contrast)",
+    "no_emoji_rule": "Strictly no emojis throughout the UI as requested. Use Lucide SVG icons exclusively (e.g. Coffee, Utensils, QrCode, CheckCircle2, ShieldCheck, Printer, Download, Plus, Minus, CreditCard, Wallet, Banknote).",
+    "locale_conventions": "Currency formatted with Philippine Peso symbol '₱' (e.g. ₱120.00), standard Philippine mobile format (09XX-XXX-XXXX) for GCash payment references."
+  },
+  "instructions_to_main_agent": [
+    "Honor the original sample UI design: warm rounded brown theme (#8C4A27, #6F3E22, #FBF7F0), rounded brown badge for TABLE #, 3-column rounded product tiles, quantity steppers, and pill-shaped action buttons.",
+    "Do NOT use emojis anywhere in the system; use clean Lucide-react icons instead.",
+    "Implement real QR code routing: scanning QR routes to `/t/:table` (e.g. `/t/1` to `/t/40`), auto-filling the table number badge.",
+    "Include Cashier Terminal (`/cashier`) with real-time order status, payment verification (Cash/GCash/Card), and printable receipt dialog.",
+    "Include Admin Dashboard (`/admin`) with login requiring Terms & Conditions modal agreement, full Product CRUD (custom image upload + URL input including Imgur), Category manager, Store Settings (logo, background image, shop name, tagline, GCash QR image), QR code generator for 40 tables with bulk print view, and JSON export/import backup.",
+    "Ensure all testable elements contain explicit `data-testid` attributes."
+  ]
+}
